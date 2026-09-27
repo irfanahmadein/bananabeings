@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Banana Beings
 
-## Getting Started
+A small open-source tee shop. Editorial layout in the spirit of a modern Indian D2C clothing site — big type, category tiles, a cloth story, bestseller rows, cart drawer — with an original brand: **banana-cotton tees for young people**.
 
-First, run the development server:
+No database. The catalog is TypeScript. The cart stays in the browser. Hosting on Vercel’s free tier is enough.
+
+## Run
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Piece | Choice | Why |
+| --- | --- | --- |
+| Framework | Next.js App Router | Static pages, cheap on Vercel |
+| Styles | Tailwind CSS | No design-system subscription |
+| Catalog | `src/data/catalog.ts` | No Postgres, no Shopify bill |
+| Cart | `localStorage` | No server session |
+| Checkout | Demo confirmation in `sessionStorage` | No payment provider |
+| Database | None | SQLite still needs a disk Vercel won’t keep for free |
 
-## Learn More
+Heavier starters (Next.js Commerce + Shopify, Medusa, Saleor) look finished and then charge you for a backend. This one is a storefront you can fork.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Push the repo to GitHub and import it in [Vercel](https://vercel.com). Framework preset: Next.js. No environment variables.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## What’s in the shop
 
-## Deploy on Vercel
+Home, shop filters, product pages (colour, size, quick add), cart drawer, demo checkout, search, size guide, help, campus bulk, shipping / returns / privacy / terms.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Checkout does not charge a card and does not ship a parcel.

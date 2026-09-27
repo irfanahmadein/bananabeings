@@ -2,6 +2,11 @@
   "name": "bananabeings",
   "version": "0.1.0",
   "private": true,
+  "description": "Banana Beings — an open-source demo tee shop. No database.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
