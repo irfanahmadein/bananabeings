@@ -14,11 +14,11 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "Banana Beings — comfort apparel for warm days",
+    default: "Banana Beings — a line on every top",
     template: "%s — Banana Beings",
   },
   description:
-    "Comfort apparel in a banana-cotton knit: crews, vests, crops, and tiny joke prints. A demo shop: nothing is charged or shipped.",
+    "Soft apparel with a line on every top: casual, work, and sport. A demo shop: nothing is charged or shipped.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

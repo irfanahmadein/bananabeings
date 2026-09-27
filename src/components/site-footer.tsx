@@ -11,7 +11,7 @@ export function SiteFooter() {
             <span className="text-lg font-semibold tracking-tight">Banana Beings</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-6 text-muted">
-            New-age comfort apparel in a banana-cotton knit. Crews, vests, crops, and a few tiny jokes. Made for warm weather.
+            Soft apparel that is not trying to be serious. A line on every top, for casual days, smart work, and sport.
           </p>
           <p className="mt-4 max-w-sm text-xs leading-5 text-muted">
             Demo shop for trying a website. Nothing here is charged or shipped.
@@ -25,7 +25,9 @@ export function SiteFooter() {
             ["/shop?g=women", "Women"],
             ["/shop?c=vest", "Vests"],
             ["/shop?c=crop", "Crops"],
-            ["/shop?c=joke", "Joke prints"],
+            ["/shop?o=casual", "Casual"],
+            ["/shop?o=work", "Work"],
+            ["/shop?o=sport", "Sport"],
             ["/shop?c=pack", "Packs"],
           ]}
         />

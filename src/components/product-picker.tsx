@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import { colorViews, knits, type Product } from "@/data/catalog";
+import { PincodeCheck } from "@/components/pincode-check";
 import { care, fitNote, modelLine, occasionLine, shippingNote } from "@/data/facts";
 import { inr } from "@/lib/money";
 
@@ -50,9 +51,10 @@ export function ProductPicker({ product }: { product: Product }) {
       </div>
       <div>
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
-          {product.audience} · {product.fit}
+          {product.audience} · {product.occasion} · {product.fit}
         </p>
         <h1 className="mt-2 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">{product.name}</h1>
+        {product.print ? <p className="mt-3 text-2xl font-semibold tracking-tight">“{product.print}”</p> : null}
         <p className="mt-4 flex items-baseline gap-3">
           <span className="text-2xl font-semibold">{inr(product.price)}</span>
           {product.compareAt ? <span className="text-muted line-through">{inr(product.compareAt)}</span> : null}
@@ -160,6 +162,7 @@ export function ProductPicker({ product }: { product: Product }) {
             </div>
           </dl>
         ) : null}
+        <PincodeCheck />
       </div>
     </div>
   );

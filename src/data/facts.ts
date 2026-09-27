@@ -16,17 +16,14 @@ export function modelLine(product: Product) {
   return `Shown on ${model.name}, ${model.height}, wearing ${model.size}.`;
 }
 
-const occasions: Record<Product["category"], string> = {
-  crew: "Office, everyday, lounge, travel",
-  vest: "Heat, everyday, lounge",
-  crop: "Everyday, lounge",
-  oversized: "Lounge, travel, everyday",
-  printed: "Everyday, office",
-  pack: "A week of the same crew",
-};
+const wornFor = {
+  casual: "Days off, errands, the group chat",
+  work: "Desk, calls, the long afternoon",
+  sport: "Training, runs, a hot gym",
+} as const;
 
 export function occasionLine(product: Product) {
-  return occasions[product.category];
+  return product.occasion ? wornFor[product.occasion] : "Everyday";
 }
 
 export function fitNote(product: Product) {

@@ -13,7 +13,9 @@ const menus = [
       { href: "/shop?g=men&c=crew", label: "Crew" },
       { href: "/shop?g=men&c=vest", label: "Vest" },
       { href: "/shop?g=men&c=oversized", label: "Oversized" },
-      { href: "/shop?g=men&c=joke", label: "Jokes" },
+      { href: "/shop?g=men&o=casual", label: "Casual" },
+      { href: "/shop?g=men&o=work", label: "Work" },
+      { href: "/shop?g=men&o=sport", label: "Sport" },
       { href: "/shop?c=pack", label: "Packs" },
     ],
   },
@@ -24,7 +26,9 @@ const menus = [
       { href: "/shop?g=women&c=crew", label: "Crew" },
       { href: "/shop?g=women&c=crop", label: "Crop" },
       { href: "/shop?g=women&c=oversized", label: "Oversized" },
-      { href: "/shop?g=women&c=joke", label: "Jokes" },
+      { href: "/shop?g=women&o=casual", label: "Casual" },
+      { href: "/shop?g=women&o=work", label: "Work" },
+      { href: "/shop?g=women&o=sport", label: "Sport" },
     ],
   },
 ];
@@ -130,7 +134,7 @@ export function SiteHeader() {
                     aria-expanded={open === entry.label}
                     onClick={() => setOpen((value) => (value === entry.label ? null : entry.label))}
                   >
-                    {open === entry.label ? "Hide" : "Cuts"}
+                    {open === entry.label ? "Hide" : "More"}
                   </button>
                 </div>
                 {open === entry.label ? (

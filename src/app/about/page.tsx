@@ -10,7 +10,7 @@ export default function AboutPage() {
       <h1 className="mt-2 text-5xl font-semibold tracking-[-0.05em]">Comfort, with a banana in the name.</h1>
       <div className="mt-8 space-y-5 text-lg leading-8 text-ink/80">
         <p>
-          Banana Beings is comfort apparel for people who live in warm cities: crews, men’s vests, women’s crops, and a short run of joke prints. The name is the joke. The cloth is not.
+          Banana Beings is soft apparel for people who live in warm cities, and it is not trying to be serious. Every top carries a line: something funny or current for a day off, a nudge for smart work, or a push for the gym. The cloth is still the serious part.
         </p>
         <p>
           Banana fibre is the soft part. Cotton keeps the shoulder and the hem from giving up. We knit three weights — Soft Peel, Heavy Bunch, and Printed Peel — and we stop there.

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductCard } from "@/components/product-card";
-import { catalogColors, filterProducts, products, SIZES } from "@/data/catalog";
+import { catalogColors, filterProducts, SIZES } from "@/data/catalog";
 
 export const metadata: Metadata = { title: "Shop" };
 
@@ -9,39 +9,36 @@ const filters = [
   { href: "/shop", label: "All" },
   { href: "/shop?g=men", label: "Men" },
   { href: "/shop?g=women", label: "Women" },
+  { href: "/shop?o=casual", label: "Casual" },
+  { href: "/shop?o=work", label: "Work" },
+  { href: "/shop?o=sport", label: "Sport" },
   { href: "/shop?c=crew", label: "Crew" },
   { href: "/shop?c=vest", label: "Vest" },
   { href: "/shop?c=crop", label: "Crop" },
   { href: "/shop?c=oversized", label: "Oversized" },
-  { href: "/shop?c=joke", label: "Jokes" },
   { href: "/shop?c=pack", label: "Packs" },
   { href: "/shop?sale=1", label: "Sale" },
 ];
 
+const occasionName: Record<string, string> = { casual: "Casual", work: "Work", sport: "Sport" };
+
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: Promise<{ g?: string; c?: string; sale?: string; color?: string; size?: string }>;
+  searchParams: Promise<{ g?: string; c?: string; o?: string; sale?: string; color?: string; size?: string }>;
 }) {
   const params = await searchParams;
   const audience = params.g;
   const category = params.c;
+  const occasion = params.o;
   const sale = params.sale === "1";
   const color = params.color;
   const size = params.size;
-  const joke = params.c === "joke";
   const who = audience === "men" ? "Men" : audience === "women" ? "Women" : "";
-  const cut = joke ? "Jokes" : category ? category[0].toUpperCase() + category.slice(1) : "";
-  const list = (
-    joke ? products.filter((product) => product.slug.startsWith("joke-")) : filterProducts({ audience, category, sale })
-  ).filter((product) => {
-    if (audience === "men" && product.audience === "women") return false;
-    if (audience === "women" && product.audience === "men") return false;
-    if (color && !product.colors.some((entry) => entry.name.toLowerCase() === color.toLowerCase())) return false;
-    if (size && !product.sizes.includes(size)) return false;
-    return true;
-  });
-  const title = sale ? "Sale" : [who, cut].filter(Boolean).join(" · ") || "All comfort";
+  const day = occasion ? occasionName[occasion] ?? "" : "";
+  const cut = category ? category[0].toUpperCase() + category.slice(1) : "";
+  const list = filterProducts({ audience, category, occasion, sale, color, size });
+  const title = sale ? "Sale" : [who, day, cut].filter(Boolean).join(" · ") || "Every line";
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8">
@@ -52,14 +49,17 @@ export default async function ShopPage({
       </p>
       <div className="rail mt-6 flex gap-2 overflow-x-auto pb-2">
         {filters.map((filter) => {
+          const query = new URL(filter.href, "http://local").searchParams;
           const active =
             filter.href === "/shop"
-              ? !audience && !category && !sale
-              : filter.href.includes("sale")
-                ? sale
-                : filter.href.includes("g=")
-                  ? audience === filter.href.split("=")[1] && !category && !sale
-                  : category === filter.href.split("=")[1] && !sale;
+              ? !audience && !category && !occasion && !sale
+              : query.has("sale")
+                ? sale && !category && !occasion
+                : query.has("g")
+                  ? audience === query.get("g") && !category && !occasion && !sale
+                  : query.has("o")
+                    ? occasion === query.get("o") && !category && !sale
+                    : category === query.get("c") && !occasion && !sale;
           return (
             <Link
               key={filter.href}
@@ -79,6 +79,7 @@ export default async function ShopPage({
           const q = new URLSearchParams();
           if (audience) q.set("g", audience);
           if (category) q.set("c", category);
+          if (occasion) q.set("o", occasion);
           if (sale) q.set("sale", "1");
           if (!active) q.set("color", entry.name);
           if (size) q.set("size", size);
@@ -103,6 +104,7 @@ export default async function ShopPage({
           const q = new URLSearchParams();
           if (audience) q.set("g", audience);
           if (category) q.set("c", category);
+          if (occasion) q.set("o", occasion);
           if (sale) q.set("sale", "1");
           if (color) q.set("color", color);
           if (!active) q.set("size", entry);

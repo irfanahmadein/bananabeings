@@ -1,5 +1,6 @@
 export type Audience = "men" | "women";
-export type Category = "crew" | "oversized" | "printed" | "crop" | "vest" | "pack";
+export type Category = "crew" | "oversized" | "printed" | "crop" | "vest" | "pack" | "sport";
+export type Occasion = "casual" | "work" | "sport";
 export type KnitId = "soft-peel" | "heavy-bunch" | "printed-peel";
 
 export type ColorView = {
@@ -27,6 +28,7 @@ export type Product = {
   fit: string;
   colors: Colorway[];
   sizes: string[];
+  occasion?: Occasion;
   print?: string;
   badge?: "Bestseller" | "New" | "Sale";
 };
@@ -45,11 +47,12 @@ function joke(
   return {
     slug,
     name,
-    blurb: `A very small “${print}” on the chest. The joke is the print.`,
-    description: `Everyday banana-cotton crew with “${print}” set tiny on the left chest. Water-based ink. The rest of the shirt stays quiet.`,
+    blurb: `“${print}” on the chest. Casual, and not trying to be serious.`,
+    description: `Everyday banana-cotton crew with “${print}” set small on the left chest. Water-based ink. The line is the point.`,
     price: 1199,
     audience,
-    category: "printed",
+    category: "crew",
+    occasion: "casual",
     knit: "printed-peel",
     fit: "Regular",
     colors: [{ name: color, hex, image }],
@@ -57,6 +60,16 @@ function joke(
     print,
     badge: "New",
   };
+}
+
+function fiveColors(slug: string): Colorway[] {
+  return [
+    { name: "Ink", hex: "#1a1814", image: `/looks/${slug}-ink.jpg` },
+    { name: "Paper", hex: "#f7f1e6", image: `/looks/${slug}-paper.jpg` },
+    { name: "Ripe", hex: "#e2b33a", image: `/looks/${slug}-ripe.jpg` },
+    { name: "Teal", hex: "#2f6f6a", image: `/looks/${slug}-teal.jpg` },
+    { name: "Maroon", hex: "#6e2e34", image: `/looks/${slug}-maroon.jpg` },
+  ];
 }
 
 export const knits: {
@@ -415,7 +428,7 @@ export const products: Product[] = [
     name: "Cloud Crop",
     blurb: "A plain women’s crop. Ends at the waist.",
     description:
-      "Soft Peel jersey, straight hem, meant to sit on a high waist. No print. The comfort is the point.",
+      "Soft Peel jersey, straight hem, meant to sit on a high waist. “off camera” sits small on the chest.",
     price: 999,
     compareAt: 1399,
     audience: "women",
@@ -439,10 +452,156 @@ export const products: Product[] = [
     compareAt: 2997,
     audience: "men",
     category: "pack",
+    occasion: "work",
+    print: "the rotation",
     knit: "soft-peel",
     fit: "Regular",
     colors: [{ name: "Set", hex: "#1a1814", image: "/looks/daily-three.jpg" }],
     sizes: [...SIZES],
+    badge: "New",
+  },
+  {
+    slug: "one-more-set",
+    name: "One More Set",
+    blurb: "A sport crew for the round you almost skipped.",
+    description:
+      "Soft Peel, cut to move, with “one more set” small on the chest. For the gym, a run, or the hot part of the day.",
+    price: 1299,
+    compareAt: 1699,
+    audience: "men",
+    category: "sport",
+    knit: "soft-peel",
+    fit: "Regular",
+    colors: fiveColors("one-more-set"),
+    sizes: [...SIZES],
+    badge: "New",
+  },
+  {
+    slug: "show-up",
+    name: "Show Up",
+    blurb: "A women’s sport crew. The line is the warm-up.",
+    description:
+      "Soft Peel jersey with room through the shoulder. “show up” sits small on the chest. Training, or just the walk there.",
+    price: 1299,
+    compareAt: 1699,
+    audience: "women",
+    category: "sport",
+    knit: "soft-peel",
+    fit: "Regular",
+    colors: fiveColors("show-up"),
+    sizes: ["XS", "S", "M", "L", "XL"],
+    badge: "New",
+  },
+  {
+    slug: "quiet-win",
+    name: "Quiet Win",
+    blurb: "A sport crop. Ends at the waist, says the quiet part.",
+    description:
+      "Cropped Soft Peel for training. “quiet win” is small on the chest. The hem sits at a high waist.",
+    price: 1199,
+    compareAt: 1499,
+    audience: "women",
+    category: "sport",
+    knit: "soft-peel",
+    fit: "Cropped",
+    colors: fiveColors("quiet-win"),
+    sizes: ["XS", "S", "M", "L", "XL"],
+    badge: "New",
+  },
+  {
+    slug: "last-rep",
+    name: "Last Rep",
+    blurb: "A fitted sport crew for the rep you said was the last one.",
+    description:
+      "Soft Peel, closer through the chest, with “last rep” small on the left. For the gym floor, not the commute.",
+    price: 1299,
+    compareAt: 1699,
+    audience: "men",
+    category: "sport",
+    knit: "soft-peel",
+    fit: "Regular",
+    colors: fiveColors("last-rep"),
+    sizes: [...SIZES],
+    badge: "New",
+  },
+  {
+    slug: "stay-in",
+    name: "Stay In",
+    blurb: "A men’s sport vest. No sleeves, one line.",
+    description:
+      "Sleeveless Soft Peel with a rib neck. “stay in” sits small on the chest. Cut for heat and a long set.",
+    price: 999,
+    compareAt: 1399,
+    audience: "men",
+    category: "sport",
+    knit: "soft-peel",
+    fit: "Vest",
+    colors: fiveColors("stay-in"),
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badge: "New",
+  },
+  {
+    slug: "easy-pace",
+    name: "Easy Pace",
+    blurb: "A looser sport tee for the run that is not a race.",
+    description:
+      "Soft Peel with a bit more room through the body. “easy pace” is small on the chest. For a jog, a walk, or the warm-up.",
+    price: 1299,
+    compareAt: 1599,
+    audience: "men",
+    category: "sport",
+    knit: "soft-peel",
+    fit: "Regular",
+    colors: fiveColors("easy-pace"),
+    sizes: [...SIZES],
+    badge: "New",
+  },
+  {
+    slug: "own-pace",
+    name: "Own Pace",
+    blurb: "A women’s sport crew. The line is the reminder.",
+    description:
+      "Soft Peel jersey, room through the shoulder, “own pace” small on the chest. Training, or the long way home.",
+    price: 1299,
+    compareAt: 1699,
+    audience: "women",
+    category: "sport",
+    knit: "soft-peel",
+    fit: "Regular",
+    colors: fiveColors("own-pace"),
+    sizes: ["XS", "S", "M", "L", "XL"],
+    badge: "New",
+  },
+  {
+    slug: "still-moving",
+    name: "Still Moving",
+    blurb: "A women’s sport vest for the hot part of the session.",
+    description:
+      "Sleeveless Soft Peel, rib neck, hem that stays put. “still moving” is small on the chest.",
+    price: 999,
+    compareAt: 1399,
+    audience: "women",
+    category: "sport",
+    knit: "soft-peel",
+    fit: "Vest",
+    colors: fiveColors("still-moving"),
+    sizes: ["XS", "S", "M", "L", "XL"],
+    badge: "New",
+  },
+  {
+    slug: "keep-going",
+    name: "Keep Going",
+    blurb: "A sport crop with a short line and a short hem.",
+    description:
+      "Cropped Soft Peel for training. “keep going” sits small on the chest. The hem ends at a high waist.",
+    price: 1199,
+    compareAt: 1499,
+    audience: "women",
+    category: "sport",
+    knit: "soft-peel",
+    fit: "Cropped",
+    colors: fiveColors("keep-going"),
+    sizes: ["XS", "S", "M", "L", "XL"],
     badge: "New",
   },
   joke("joke-no-thoughts", "No Thoughts", "men", "Ink", "#1a1814", "/looks/joke-no-thoughts.jpg", "no thoughts"),
@@ -518,7 +677,82 @@ const viewSets: [string, string, string][] = [
   ["joke-on-dnd", "Teal", "joke-on-dnd"],
 ];
 
+for (const slug of ["last-rep", "stay-in", "easy-pace", "own-pace", "still-moving", "keep-going"]) {
+  for (const color of ["Ink", "Paper", "Ripe", "Teal", "Maroon"]) {
+    viewSets.push([slug, color, `${slug}-${color.toLowerCase()}`]);
+  }
+}
+
 for (const [slug, color, stem] of viewSets) attachViews(slug, color, stem);
+
+const lines: Record<string, { occasion: Occasion; print: string }> = {
+  "ripe-crew": { occasion: "casual", print: "main character" },
+  "ripe-crew-men": { occasion: "casual", print: "plot armour" },
+  "daily-crew": { occasion: "work", print: "deep work" },
+  "oversized-bunch": { occasion: "casual", print: "big mood" },
+  "too-ripe": { occasion: "casual", print: "ripe" },
+  "too-ripe-men": { occasion: "casual", print: "ripe" },
+  "after-class": { occasion: "work", print: "after this" },
+  "night-bus": { occasion: "casual", print: "night" },
+  "night-bus-women": { occasion: "casual", print: "night" },
+  "lounge-tee": { occasion: "work", print: "soft focus" },
+  "crop-being": { occasion: "casual", print: "being" },
+  "big-cloud": { occasion: "casual", print: "cloud mode" },
+  "being-print": { occasion: "casual", print: "being" },
+  "heatwave": { occasion: "work", print: "light work" },
+  "heatwave-men": { occasion: "work", print: "light work" },
+  "first-peel": { occasion: "work", print: "start here" },
+  "air-vest": { occasion: "sport", print: "still here" },
+  "cloud-crop": { occasion: "work", print: "off camera" },
+  "daily-three": { occasion: "work", print: "the rotation" },
+  "one-more-set": { occasion: "sport", print: "one more set" },
+  "show-up": { occasion: "sport", print: "show up" },
+  "quiet-win": { occasion: "sport", print: "quiet win" },
+  "last-rep": { occasion: "sport", print: "last rep" },
+  "stay-in": { occasion: "sport", print: "stay in" },
+  "easy-pace": { occasion: "sport", print: "easy pace" },
+  "own-pace": { occasion: "sport", print: "own pace" },
+  "still-moving": { occasion: "sport", print: "still moving" },
+  "keep-going": { occasion: "sport", print: "keep going" },
+  "joke-no-thoughts": { occasion: "casual", print: "no thoughts" },
+  "joke-touch-grass": { occasion: "casual", print: "touch grass" },
+  "joke-send-help": { occasion: "casual", print: "send help" },
+  "joke-plot-twist": { occasion: "casual", print: "plot twist" },
+  "joke-low-bat": { occasion: "casual", print: "low bat" },
+  "joke-the-vibe": { occasion: "casual", print: "the vibe" },
+  "joke-soft-launch": { occasion: "casual", print: "soft launch" },
+  "joke-be-so-real": { occasion: "casual", print: "be so real" },
+  "joke-npc": { occasion: "casual", print: "npc" },
+  "joke-on-dnd": { occasion: "casual", print: "on dnd" },
+};
+
+for (const product of products) {
+  const line = lines[product.slug];
+  if (!line) throw new Error(`Missing line on ${product.slug}`);
+  product.occasion = line.occasion;
+  product.print = line.print;
+}
+
+const fillPalette = [
+  { name: "Ink", hex: "#1a1814" },
+  { name: "Paper", hex: "#f7f1e6" },
+  { name: "Ripe", hex: "#e2b33a" },
+  { name: "Teal", hex: "#2f6f6a" },
+  { name: "Maroon", hex: "#6e2e34" },
+];
+
+for (const product of products) {
+  if (product.category === "pack") continue;
+  for (const swatch of fillPalette) {
+    if (product.colors.length >= 5) break;
+    if (product.colors.some((color) => color.name === swatch.name)) continue;
+    product.colors.push({
+      name: swatch.name,
+      hex: swatch.hex,
+      image: `/looks/${product.slug}-${swatch.name.toLowerCase()}.jpg`,
+    });
+  }
+}
 
 export function colorViews(color: Colorway): ColorView[] {
   return color.views?.length ? color.views : [{ label: "Front", src: color.image }];
@@ -545,6 +779,7 @@ export function catalogColors() {
 export function filterProducts(opts: {
   audience?: string;
   category?: string;
+  occasion?: string;
   sale?: boolean;
   q?: string;
   color?: string;
@@ -556,11 +791,12 @@ export function filterProducts(opts: {
     if (opts.audience === "men" && p.audience === "women") return false;
     if (opts.audience === "women" && p.audience === "men") return false;
     if (opts.category && p.category !== opts.category) return false;
+    if (opts.occasion && p.occasion !== opts.occasion) return false;
     if (opts.sale && !isOnSale(p)) return false;
     if (color && !p.colors.some((entry) => entry.name.toLowerCase() === color)) return false;
     if (opts.size && !p.sizes.includes(opts.size)) return false;
     if (q) {
-      const hay = `${p.name} ${p.blurb} ${p.category} ${p.print ?? ""}`.toLowerCase();
+      const hay = `${p.name} ${p.blurb} ${p.category} ${p.occasion ?? ""} ${p.print ?? ""}`.toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
@@ -592,7 +828,7 @@ export const reasons = [
   {
     n: "04",
     title: "Easy to live in",
-    body: "Cut for sitting, riding, and a long day out. Not a gym costume and not a stiff office shirt.",
+    body: "Cut for a desk, a day off, and a training hour. The line changes. The cloth does not.",
   },
 ];
 
@@ -620,7 +856,7 @@ export const reviews = [
   {
     name: "Sara",
     place: "Hyderabad",
-    text: "Crop Being sits at the waist of my jeans and stays there. Most crops in this price are a joke.",
+    text: "Crop Being sits at the waist of my jeans and stays there. Most crops in this price ride up.",
   },
   {
     name: "Dev",
@@ -634,6 +870,8 @@ export const zones = [
   { href: "/shop?g=women", title: "Women", kicker: "Tees and crops", image: "/looks/lounge-blush.jpg" },
   { href: "/shop?c=vest", title: "Vests", kicker: "Sleeveless, still soft", image: "/looks/vest-ink.jpg" },
   { href: "/shop?c=crop", title: "Crops", kicker: "Ends at the waist", image: "/looks/crop-cloud-ink.jpg" },
-  { href: "/shop?c=joke", title: "Jokes", kicker: "One line, tiny type", image: "/looks/joke-the-vibe.jpg" },
+  { href: "/shop?o=casual", title: "Casual", kicker: "A line for off duty", image: "/looks/joke-the-vibe.jpg" },
+  { href: "/shop?o=work", title: "Work", kicker: "A nudge, not a uniform", image: "/looks/daily-crew-ink.jpg" },
+  { href: "/shop?o=sport", title: "Sport", kicker: "One line, then move", image: "/looks/one-more-set-ink.jpg" },
   { href: "/shop?c=oversized", title: "Oversized", kicker: "Heavy Bunch knit", image: "/looks/oversized-ink.jpg" },
 ];
