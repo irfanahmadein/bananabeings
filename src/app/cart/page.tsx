@@ -24,7 +24,12 @@ export default function CartPage() {
           <ul className="mt-8 divide-y divide-line">
             {cart.items.map((item) => (
               <li key={item.key} className="flex items-center gap-4 py-4">
-                <span className="h-14 w-14 rounded-2xl border border-line" style={{ background: item.hex }} />
+                {item.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={item.image} alt="" className="h-20 w-16 object-cover" />
+                ) : (
+                  <span className="h-14 w-14 border border-line" style={{ background: item.hex }} />
+                )}
                 <div className="min-w-0 flex-1">
                   <p className="font-semibold">{item.name}</p>
                   <p className="text-sm text-muted">

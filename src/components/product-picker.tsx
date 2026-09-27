@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { TeeArt } from "@/components/brand";
+import Image from "next/image";
+import { useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import type { Product } from "@/data/catalog";
 import { knits } from "@/data/catalog";
@@ -15,12 +15,17 @@ export function ProductPicker({ product }: { product: Product }) {
   const color = product.colors.find((entry) => entry.name === colorName) ?? product.colors[0];
   const knit = knits.find((entry) => entry.id === product.knit);
 
-  const maskId = useMemo(() => `pdp-${product.slug}-${color.name}`, [product.slug, color.name]);
-
   return (
-    <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-      <div className="rounded-3xl bg-[#efeae1] p-6 sm:p-10">
-        <TeeArt color={color.hex} print={product.print} maskId={maskId} className="mx-auto w-full max-w-md" />
+    <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
+      <div className="relative aspect-[3/4] overflow-hidden bg-[#efeae1]">
+        <Image
+          src={color.image}
+          alt={`${product.name} in ${color.name}`}
+          fill
+          priority
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="object-cover object-top"
+        />
       </div>
       <div>
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
@@ -92,6 +97,7 @@ export function ProductPicker({ product }: { product: Product }) {
                 hex: color.hex,
                 size,
                 price: product.price,
+                image: color.image,
                 qty,
               })
             }

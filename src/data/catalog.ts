@@ -1,10 +1,11 @@
 export type Audience = "men" | "women" | "unisex";
-export type Category = "crew" | "oversized" | "printed" | "crop";
+export type Category = "crew" | "oversized" | "printed" | "crop" | "vest";
 export type KnitId = "soft-peel" | "heavy-bunch" | "printed-peel";
 
 export type Colorway = {
   name: string;
   hex: string;
+  image: string;
 };
 
 export type Product = {
@@ -25,6 +26,32 @@ export type Product = {
 };
 
 export const SIZES = ["XS", "S", "M", "L", "XL", "XXL"] as const;
+
+function joke(
+  slug: string,
+  name: string,
+  audience: "men" | "women",
+  color: string,
+  hex: string,
+  image: string,
+  print: string,
+): Product {
+  return {
+    slug,
+    name,
+    blurb: `A very small “${print}” on the chest. The joke is the print.`,
+    description: `Everyday banana-cotton crew with “${print}” set tiny on the left chest. Water-based ink. The rest of the shirt stays quiet.`,
+    price: 1199,
+    audience,
+    category: "printed",
+    knit: "printed-peel",
+    fit: "Regular",
+    colors: [{ name: color, hex, image }],
+    sizes: [...SIZES],
+    print,
+    badge: "New",
+  };
+}
 
 export const knits: {
   id: KnitId;
@@ -69,8 +96,8 @@ export const products: Product[] = [
     knit: "soft-peel",
     fit: "Regular",
     colors: [
-      { name: "Ripe", hex: "#f0c14b" },
-      { name: "Ink", hex: "#1a1814" },
+      { name: "Ripe", hex: "#f0c14b", image: "/looks/ripe-crew-ripe.jpg" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/ripe-crew-ink.jpg" },
     ],
     sizes: [...SIZES],
     badge: "Bestseller",
@@ -88,9 +115,9 @@ export const products: Product[] = [
     knit: "soft-peel",
     fit: "Regular",
     colors: [
-      { name: "Ink", hex: "#1a1814" },
-      { name: "Sand", hex: "#d8c3a5" },
-      { name: "Dusk", hex: "#2c3e55" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/daily-crew-ink.jpg" },
+      { name: "Sand", hex: "#d8c3a5", image: "/looks/daily-crew-sand.jpg" },
+      { name: "Dusk", hex: "#2c3e55", image: "/looks/daily-crew-dusk.jpg" },
     ],
     sizes: [...SIZES],
     badge: "Bestseller",
@@ -108,8 +135,8 @@ export const products: Product[] = [
     knit: "heavy-bunch",
     fit: "Oversized",
     colors: [
-      { name: "Ink", hex: "#1a1814" },
-      { name: "Olive", hex: "#5c6842" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/oversized-ink.jpg" },
+      { name: "Olive", hex: "#5c6842", image: "/looks/oversized-olive.jpg" },
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
     badge: "New",
@@ -117,20 +144,20 @@ export const products: Product[] = [
   {
     slug: "too-ripe",
     name: "Too Ripe",
-    blurb: "A small chest print. Loud enough, not a billboard.",
+    blurb: "One small word on the chest. That’s the graphic.",
     description:
-      "White or ink jersey with TOO RIPE set small on the chest. Water-based ink, so it softens instead of cracking.",
+      "Paper or ink jersey with “ripe” set tiny on the left chest. Water-based ink, so it softens instead of cracking.",
     price: 1299,
     audience: "unisex",
     category: "printed",
     knit: "printed-peel",
     fit: "Regular",
     colors: [
-      { name: "Paper", hex: "#f7f1e6" },
-      { name: "Ink", hex: "#1a1814" },
+      { name: "Paper", hex: "#f7f1e6", image: "/looks/too-ripe-paper.jpg" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/too-ripe-ink.jpg" },
     ],
     sizes: [...SIZES],
-    print: "TOO RIPE",
+    print: "ripe",
     badge: "New",
   },
   {
@@ -146,8 +173,8 @@ export const products: Product[] = [
     knit: "soft-peel",
     fit: "Regular",
     colors: [
-      { name: "Maroon", hex: "#6e2e34" },
-      { name: "Navy", hex: "#243044" },
+      { name: "Maroon", hex: "#6e2e34", image: "/looks/after-class-maroon.jpg" },
+      { name: "Navy", hex: "#243044", image: "/looks/after-class-navy.jpg" },
     ],
     sizes: [...SIZES],
     badge: "Sale",
@@ -155,20 +182,20 @@ export const products: Product[] = [
   {
     slug: "night-bus",
     name: "Night Bus",
-    blurb: "Late colour, small type, heavier than it looks.",
+    blurb: "Late colour. One quiet word.",
     description:
-      "Printed Peel for the last ride home. NIGHT BUS sits high on the chest. The knit is the everyday jersey, not a costume.",
+      "Printed Peel for the last ride home. “night” sits small on the left chest. The knit is the everyday jersey, not a costume.",
     price: 1199,
     audience: "unisex",
     category: "printed",
     knit: "printed-peel",
     fit: "Regular",
     colors: [
-      { name: "Ink", hex: "#1a1814" },
-      { name: "Teal", hex: "#2f6f6a" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/night-bus-ink.jpg" },
+      { name: "Teal", hex: "#2f6f6a", image: "/looks/night-bus-teal.jpg" },
     ],
     sizes: [...SIZES],
-    print: "NIGHT BUS",
+    print: "night",
   },
   {
     slug: "lounge-tee",
@@ -183,9 +210,9 @@ export const products: Product[] = [
     knit: "soft-peel",
     fit: "Relaxed",
     colors: [
-      { name: "Blush", hex: "#e7c1b8" },
-      { name: "Ink", hex: "#1a1814" },
-      { name: "Sand", hex: "#d8c3a5" },
+      { name: "Blush", hex: "#e7c1b8", image: "/looks/lounge-blush.jpg" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/lounge-ink.jpg" },
+      { name: "Sand", hex: "#d8c3a5", image: "/looks/lounge-sand.jpg" },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     badge: "Bestseller",
@@ -193,9 +220,9 @@ export const products: Product[] = [
   {
     slug: "crop-being",
     name: "Crop Being",
-    blurb: "Ends at the waist. Not a costume crop.",
+    blurb: "Ends at the waist. A tiny “being” on the chest.",
     description:
-      "A short tee with a straight hem, meant to sit at the high waist of a trouser. Soft Peel jersey, narrow rib.",
+      "A short tee with a straight hem, meant to sit at the high waist of a trouser. “being” is set small on the left chest. Soft Peel jersey, narrow rib.",
     price: 899,
     compareAt: 1299,
     audience: "women",
@@ -203,9 +230,10 @@ export const products: Product[] = [
     knit: "soft-peel",
     fit: "Cropped",
     colors: [
-      { name: "Olive", hex: "#5c6842" },
-      { name: "Paper", hex: "#f7f1e6" },
+      { name: "Olive", hex: "#5c6842", image: "/looks/crop-olive.jpg" },
+      { name: "Paper", hex: "#f7f1e6", image: "/looks/crop-paper.jpg" },
     ],
+    print: "being",
     sizes: ["XS", "S", "M", "L"],
     badge: "Sale",
   },
@@ -222,25 +250,25 @@ export const products: Product[] = [
     knit: "heavy-bunch",
     fit: "Oversized",
     colors: [
-      { name: "Brown", hex: "#5a4636" },
-      { name: "Ink", hex: "#1a1814" },
+      { name: "Brown", hex: "#5a4636", image: "/looks/big-cloud-brown.jpg" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/big-cloud-ink.jpg" },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
   },
   {
     slug: "being-print",
     name: "Being Print",
-    blurb: "One word. That’s the graphic.",
+    blurb: "One word. That’s the whole graphic.",
     description:
-      "BEING, set in the same type as the wordmark, small on the left chest. Paper jersey only — the print does the work.",
+      "“being”, lowercase, small on the left chest. Paper jersey only — the print does the work.",
     price: 1199,
     audience: "women",
     category: "printed",
     knit: "printed-peel",
     fit: "Relaxed",
-    colors: [{ name: "Paper", hex: "#f7f1e6" }],
+    colors: [{ name: "Paper", hex: "#f7f1e6", image: "/looks/being-print-paper.jpg" }],
     sizes: ["XS", "S", "M", "L", "XL"],
-    print: "BEING",
+    print: "being",
     badge: "New",
   },
   {
@@ -255,8 +283,8 @@ export const products: Product[] = [
     knit: "soft-peel",
     fit: "Regular",
     colors: [
-      { name: "Teal", hex: "#2f6f6a" },
-      { name: "Dusk", hex: "#2c3e55" },
+      { name: "Teal", hex: "#2f6f6a", image: "/looks/heatwave-teal.jpg" },
+      { name: "Dusk", hex: "#2c3e55", image: "/looks/heatwave-dusk.jpg" },
     ],
     sizes: [...SIZES],
   },
@@ -272,10 +300,58 @@ export const products: Product[] = [
     category: "crew",
     knit: "soft-peel",
     fit: "Regular",
-    colors: [{ name: "Pale", hex: "#c9d7b8" }],
+    colors: [{ name: "Pale", hex: "#c9d7b8", image: "/looks/first-peel-pale.jpg" }],
     sizes: [...SIZES],
     badge: "Sale",
   },
+  {
+    slug: "air-vest",
+    name: "Air Vest",
+    blurb: "A men’s vest for heat. No sleeves, same cloth.",
+    description:
+      "Banana-cotton vest with a rib neck and a hem that doesn’t roll. Cut for men who want the crew feeling without the sleeves.",
+    price: 899,
+    compareAt: 1299,
+    audience: "men",
+    category: "vest",
+    knit: "soft-peel",
+    fit: "Vest",
+    colors: [
+      { name: "Ink", hex: "#1a1814", image: "/looks/vest-ink.jpg" },
+      { name: "Sand", hex: "#d8c3a5", image: "/looks/vest-sand.jpg" },
+    ],
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badge: "New",
+  },
+  {
+    slug: "cloud-crop",
+    name: "Cloud Crop",
+    blurb: "A plain women’s crop. Ends at the waist.",
+    description:
+      "Soft Peel jersey, straight hem, meant to sit on a high waist. No print. The comfort is the point.",
+    price: 999,
+    compareAt: 1399,
+    audience: "women",
+    category: "crop",
+    knit: "soft-peel",
+    fit: "Cropped",
+    colors: [
+      { name: "Paper", hex: "#f7f1e6", image: "/looks/crop-cloud-paper.jpg" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/crop-cloud-ink.jpg" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    badge: "New",
+  },
+  joke("joke-no-thoughts", "No Thoughts", "men", "Ink", "#1a1814", "/looks/joke-no-thoughts.jpg", "no thoughts"),
+  joke("joke-touch-grass", "Touch Grass", "men", "Paper", "#f7f1e6", "/looks/joke-touch-grass.jpg", "touch grass"),
+  joke("joke-send-help", "Send Help", "men", "Navy", "#243044", "/looks/joke-send-help.jpg", "send help"),
+  joke("joke-plot-twist", "Plot Twist", "men", "Maroon", "#6e2e34", "/looks/joke-plot-twist.jpg", "plot twist"),
+  joke("joke-low-bat", "Low Battery", "men", "Olive", "#5c6842", "/looks/joke-low-bat.jpg", "low bat"),
+  joke("joke-the-vibe", "The Vibe", "women", "Blush", "#e7c1b8", "/looks/joke-the-vibe.jpg", "the vibe"),
+  joke("joke-soft-launch", "Soft Launch", "women", "Paper", "#f7f1e6", "/looks/joke-soft-launch.jpg", "soft launch"),
+  joke("joke-be-so-real", "Be So Real", "women", "Ink", "#1a1814", "/looks/joke-be-so-real.jpg", "be so real"),
+  joke("joke-npc", "NPC", "women", "Ripe", "#e2b33a", "/looks/joke-npc.jpg", "npc"),
+  joke("joke-on-dnd", "On DND", "women", "Teal", "#2f6f6a", "/looks/joke-on-dnd.jpg", "on dnd"),
 ];
 
 export function getProduct(slug: string) {
@@ -369,10 +445,10 @@ export const reviews = [
 ];
 
 export const zones = [
-  { href: "/shop?g=men", title: "Men", kicker: "Crews & oversized", swatch: "#1a1814", print: undefined },
-  { href: "/shop?g=women", title: "Women", kicker: "Lounge, crop, cloud", swatch: "#e7c1b8", print: undefined },
-  { href: "/shop?c=oversized", title: "Oversized", kicker: "Heavy Bunch knit", swatch: "#5c6842", print: undefined },
-  { href: "/shop?c=printed", title: "Printed", kicker: "Small chest type", swatch: "#f7f1e6", print: "TOO RIPE" },
-  { href: "/shop?c=crew", title: "Crew", kicker: "The everyday one", swatch: "#2c3e55", print: undefined },
-  { href: "/shop?sale=1", title: "Sale", kicker: "Same tee, lower price", swatch: "#c9d7b8", print: undefined },
+  { href: "/shop?g=men", title: "Men", kicker: "Crews and vests", image: "/looks/daily-crew-ink.jpg" },
+  { href: "/shop?g=women", title: "Women", kicker: "Tees and crops", image: "/looks/lounge-blush.jpg" },
+  { href: "/shop?c=vest", title: "Vests", kicker: "Sleeveless, still soft", image: "/looks/vest-ink.jpg" },
+  { href: "/shop?c=crop", title: "Crops", kicker: "Ends at the waist", image: "/looks/crop-cloud-ink.jpg" },
+  { href: "/shop?c=joke", title: "Jokes", kicker: "One line, tiny type", image: "/looks/joke-the-vibe.jpg" },
+  { href: "/shop?c=oversized", title: "Oversized", kicker: "Heavy Bunch knit", image: "/looks/oversized-ink.jpg" },
 ];

@@ -1,54 +1,64 @@
+import Image from "next/image";
 import Link from "next/link";
-import { TeeArt } from "@/components/brand";
 import { ProductRail } from "@/components/product-rail";
 import { isOnSale, knits, products, reasons, reviews, zones } from "@/data/catalog";
 
 export default function HomePage() {
   const bestsellers = products.filter((p) => p.badge === "Bestseller");
-  const women = products.filter((p) => p.audience === "women");
+  const jokes = products.filter((p) => p.slug.startsWith("joke-"));
+  const layers = products.filter((p) => p.category === "vest" || p.category === "crop");
   const sale = products.filter(isOnSale);
 
   return (
     <div className="mx-auto max-w-7xl px-5 sm:px-8">
       <section className="grid items-end gap-10 py-12 sm:py-20 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted">Banana-cotton tees</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted">Comfort apparel</p>
           <h1 className="mt-4 max-w-xl text-5xl font-semibold tracking-[-0.055em] sm:text-7xl sm:leading-[0.9]">
             Soft enough
             <br />
             to live in.
           </h1>
           <p className="mt-6 max-w-md text-lg leading-8 text-ink/80">
-            Tees for young people who wear one shirt all day. Banana fibre for the softness, cotton so it keeps its shape.
+            Banana-cotton for warm days. Crews, men’s vests, women’s crops, and a few jokes small enough to wear to work.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/shop" className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-card">
-              Shop tees
+            <Link href="/shop?g=men" className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-card">
+              Shop men
             </Link>
             <Link href="/shop?g=women" className="rounded-full border border-ink px-6 py-3 text-sm font-semibold">
               Shop women
             </Link>
           </div>
         </div>
-        <div className="relative">
-          <div className="rounded-[2rem] bg-banana px-6 pb-4 pt-8 sm:px-10">
-            <TeeArt color="#1a1814" print="BEING" maskId="hero-tee" className="mx-auto w-full max-w-sm" />
+        <div>
+          <div className="relative aspect-[4/5] overflow-hidden bg-[#efeae1] sm:aspect-[16/11] lg:aspect-[4/5]">
+            <Image
+              src="/looks/daily-crew-ink.jpg"
+              alt="Daily Crew in ink, worn"
+              fill
+              priority
+              sizes="(min-width: 1024px) 42vw, 100vw"
+              className="object-cover object-top"
+            />
           </div>
-          <p className="mt-3 text-sm text-muted">Ripe Crew and the rest of the line. Same knit, different volume.</p>
+          <p className="mt-3 text-sm text-muted">The daily crew. Same knit, worn in.</p>
         </div>
       </section>
 
       <section className="pb-8">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Shop by</p>
-        <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em]">Pick a tee</h2>
+        <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em]">Pick a cut</h2>
         <div className="rail -mx-5 mt-6 flex snap-x gap-4 overflow-x-auto px-5 pb-2 sm:-mx-8 sm:px-8">
           {zones.map((zone) => (
             <Link
               key={zone.href}
               href={zone.href}
-              className="w-[200px] shrink-0 snap-start rounded-2xl bg-[#efeae1] p-4 transition hover:-translate-y-0.5"
+              className="w-[200px] shrink-0 snap-start"
             >
-              <TeeArt color={zone.swatch} print={zone.print} maskId={`zone-${zone.title}`} className="h-36 w-full" />
+              <div className="relative aspect-[3/4] overflow-hidden bg-[#efeae1]">
+                <Image src={zone.image} alt="" fill sizes="200px" className="object-cover object-top" />
+              </div>
               <p className="mt-2 font-semibold">{zone.title}</p>
               <p className="text-xs text-muted">{zone.kicker}</p>
             </Link>
@@ -95,15 +105,16 @@ export default function HomePage() {
       </section>
 
       <ProductRail eyebrow="The edit" title="Bestsellers" href="/shop" products={bestsellers} />
-      <ProductRail eyebrow="Women" title="Cut a little easier" href="/shop?g=women" products={women} />
-      <ProductRail eyebrow="Sale" title="Same tee, lower price" href="/shop?sale=1" products={sale} />
+      <ProductRail eyebrow="Tiny type" title="Joke prints" href="/shop?c=joke" products={jokes} />
+      <ProductRail eyebrow="Beyond the crew" title="Vests and crops" href="/shop" products={layers} />
+      <ProductRail eyebrow="Sale" title="Same cloth, lower price" href="/shop?sale=1" products={sale} />
 
       <section className="grid gap-8 rounded-[2rem] bg-leaf px-6 py-12 text-card sm:px-10 lg:grid-cols-2">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-banana">From the founders</p>
           <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em]">We wore them first.</h2>
           <p className="mt-4 max-w-md leading-7 text-card/80">
-            Banana Beings started as two people in a hot city who were tired of tees that looked fine online and felt like plastic by noon. We wore the Ripe Crew for a week before we let anyone else. If it itched, it did not ship.
+            Banana Beings is comfort apparel for hot cities: crews, vests, and crops in one banana-cotton knit. We were tired of clothes that looked fine online and felt like plastic by noon. If it itched, it did not ship.
           </p>
           <p className="mt-6 text-sm font-semibold">Asha & Dev · Bengaluru</p>
         </div>

@@ -11,7 +11,7 @@ export function SiteFooter() {
             <span className="text-lg font-semibold tracking-tight">Banana Beings</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-6 text-muted">
-            Everyday tees in a banana-cotton knit. Made for warm weather and people who wear the same shirt until it feels like theirs.
+            New-age comfort apparel in a banana-cotton knit. Crews, vests, crops, and a few tiny jokes. Made for warm weather.
           </p>
           <p className="mt-4 max-w-sm text-xs leading-5 text-muted">
             Demo shop for trying a website. Nothing here is charged or shipped.
@@ -20,11 +20,12 @@ export function SiteFooter() {
         <FooterCol
           title="Shop"
           links={[
-            ["/shop", "All tees"],
+            ["/shop", "Shop all"],
             ["/shop?g=men", "Men"],
             ["/shop?g=women", "Women"],
-            ["/shop?c=printed", "Printed"],
-            ["/shop?sale=1", "Sale"],
+            ["/shop?c=vest", "Vests"],
+            ["/shop?c=crop", "Crops"],
+            ["/shop?c=joke", "Joke prints"],
           ]}
         />
         <FooterCol

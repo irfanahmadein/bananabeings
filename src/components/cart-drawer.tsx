@@ -51,7 +51,12 @@ export function CartDrawer() {
             <ul className="space-y-4">
               {cart.items.map((item) => (
                 <li key={item.key} className="flex gap-3 border-b border-line pb-4">
-                  <span className="mt-1 h-12 w-12 shrink-0 rounded-xl border border-line" style={{ background: item.hex }} />
+                  {item.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={item.image} alt="" className="h-20 w-16 shrink-0 object-cover" />
+                  ) : (
+                    <span className="mt-1 h-12 w-12 shrink-0 border border-line" style={{ background: item.hex }} />
+                  )}
                   <div className="min-w-0 flex-1">
                     <p className="font-semibold">{item.name}</p>
                     <p className="text-sm text-muted">
