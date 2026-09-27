@@ -1,11 +1,17 @@
-export type Audience = "men" | "women" | "unisex";
-export type Category = "crew" | "oversized" | "printed" | "crop" | "vest";
+export type Audience = "men" | "women";
+export type Category = "crew" | "oversized" | "printed" | "crop" | "vest" | "pack";
 export type KnitId = "soft-peel" | "heavy-bunch" | "printed-peel";
+
+export type ColorView = {
+  label: string;
+  src: string;
+};
 
 export type Colorway = {
   name: string;
   hex: string;
   image: string;
+  views?: ColorView[];
 };
 
 export type Product = {
@@ -58,6 +64,8 @@ export const knits: {
   name: string;
   line: string;
   detail: string;
+  composition: string;
+  gsm: string;
 }[] = [
   {
     id: "soft-peel",
@@ -65,6 +73,8 @@ export const knits: {
     line: "Everyday jersey",
     detail:
       "220 GSM banana-cotton single jersey. Enough weight to hang, light enough for a humid afternoon.",
+    composition: "60% bamboo viscose, 35% cotton, 5% elastane",
+    gsm: "220 GSM",
   },
   {
     id: "heavy-bunch",
@@ -72,6 +82,8 @@ export const knits: {
     line: "Oversized drape",
     detail:
       "280 GSM with a looped back. Sits on the shoulder instead of clinging, and still feels soft on the first wear.",
+    composition: "55% bamboo viscose, 40% cotton, 5% elastane",
+    gsm: "280 GSM",
   },
   {
     id: "printed-peel",
@@ -79,6 +91,8 @@ export const knits: {
     line: "Graphics that stay",
     detail:
       "The same everyday jersey, with a water-based chest print. No cracked plastisol after a few washes.",
+    composition: "60% bamboo viscose, 35% cotton, 5% elastane",
+    gsm: "220 GSM",
   },
 ];
 
@@ -91,13 +105,32 @@ export const products: Product[] = [
       "Our simplest tee, cut close enough to feel like clothing and loose enough to forget. Banana-cotton jersey, rib collar, hem that stays put after a wash.",
     price: 999,
     compareAt: 1499,
-    audience: "unisex",
+    audience: "women",
     category: "crew",
     knit: "soft-peel",
     fit: "Regular",
     colors: [
       { name: "Ripe", hex: "#f0c14b", image: "/looks/ripe-crew-ripe.jpg" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/ripe-crew-women-ink.jpg" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    badge: "Bestseller",
+  },
+  {
+    slug: "ripe-crew-men",
+    name: "Ripe Crew",
+    blurb: "The house colour. A straight crew in banana yellow or ink.",
+    description:
+      "Our simplest tee, cut close enough to feel like clothing and loose enough to forget. Banana-cotton jersey, rib collar, hem that stays put after a wash.",
+    price: 999,
+    compareAt: 1499,
+    audience: "men",
+    category: "crew",
+    knit: "soft-peel",
+    fit: "Regular",
+    colors: [
       { name: "Ink", hex: "#1a1814", image: "/looks/ripe-crew-ink.jpg" },
+      { name: "Ripe", hex: "#f0c14b", image: "/looks/ripe-crew-men-ripe.jpg" },
     ],
     sizes: [...SIZES],
     badge: "Bestseller",
@@ -130,7 +163,7 @@ export const products: Product[] = [
       "Cut a size easier than the Daily Crew, in Heavy Bunch terry. The hem is longer in the back so it doesn’t ride up when you sit.",
     price: 1399,
     compareAt: 1799,
-    audience: "unisex",
+    audience: "men",
     category: "oversized",
     knit: "heavy-bunch",
     fit: "Oversized",
@@ -148,13 +181,32 @@ export const products: Product[] = [
     description:
       "Paper or ink jersey with “ripe” set tiny on the left chest. Water-based ink, so it softens instead of cracking.",
     price: 1299,
-    audience: "unisex",
+    audience: "women",
     category: "printed",
     knit: "printed-peel",
     fit: "Regular",
     colors: [
       { name: "Paper", hex: "#f7f1e6", image: "/looks/too-ripe-paper.jpg" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/too-ripe-women-ink.jpg" },
+    ],
+    sizes: [...SIZES],
+    print: "ripe",
+    badge: "New",
+  },
+  {
+    slug: "too-ripe-men",
+    name: "Too Ripe",
+    blurb: "One small word on the chest. That’s the graphic.",
+    description:
+      "Paper or ink jersey with “ripe” set tiny on the left chest. Water-based ink, so it softens instead of cracking.",
+    price: 1299,
+    audience: "men",
+    category: "printed",
+    knit: "printed-peel",
+    fit: "Regular",
+    colors: [
       { name: "Ink", hex: "#1a1814", image: "/looks/too-ripe-ink.jpg" },
+      { name: "Paper", hex: "#f7f1e6", image: "/looks/too-ripe-men-paper.jpg" },
     ],
     sizes: [...SIZES],
     print: "ripe",
@@ -186,15 +238,33 @@ export const products: Product[] = [
     description:
       "Printed Peel for the last ride home. “night” sits small on the left chest. The knit is the everyday jersey, not a costume.",
     price: 1199,
-    audience: "unisex",
+    audience: "men",
     category: "printed",
     knit: "printed-peel",
     fit: "Regular",
     colors: [
       { name: "Ink", hex: "#1a1814", image: "/looks/night-bus-ink.jpg" },
-      { name: "Teal", hex: "#2f6f6a", image: "/looks/night-bus-teal.jpg" },
+      { name: "Teal", hex: "#2f6f6a", image: "/looks/night-bus-men-teal.jpg" },
     ],
     sizes: [...SIZES],
+    print: "night",
+  },
+  {
+    slug: "night-bus-women",
+    name: "Night Bus",
+    blurb: "Late colour. One quiet word.",
+    description:
+      "Printed Peel for the last ride home. “night” sits small on the left chest. The knit is the everyday jersey, not a costume.",
+    price: 1199,
+    audience: "women",
+    category: "printed",
+    knit: "printed-peel",
+    fit: "Regular",
+    colors: [
+      { name: "Teal", hex: "#2f6f6a", image: "/looks/night-bus-teal.jpg" },
+      { name: "Ink", hex: "#1a1814", image: "/looks/night-bus-women-ink.jpg" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
     print: "night",
   },
   {
@@ -242,7 +312,7 @@ export const products: Product[] = [
     name: "Big Cloud",
     blurb: "Women’s oversized, in the heavier knit.",
     description:
-      "Heavy Bunch with a shorter sleeve than the unisex oversized, so it still reads as a tee and not a dress.",
+      "Heavy Bunch with a shorter sleeve than the men’s oversized, so it still reads as a tee and not a dress.",
     price: 1399,
     compareAt: 1799,
     audience: "women",
@@ -278,13 +348,30 @@ export const products: Product[] = [
     description:
       "Same banana-cotton blend, knitted a touch finer for the worst weeks. Teal or dusk. No print.",
     price: 999,
-    audience: "unisex",
+    audience: "women",
     category: "crew",
     knit: "soft-peel",
     fit: "Regular",
     colors: [
       { name: "Teal", hex: "#2f6f6a", image: "/looks/heatwave-teal.jpg" },
+      { name: "Dusk", hex: "#2c3e55", image: "/looks/heatwave-women-dusk.jpg" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
+  },
+  {
+    slug: "heatwave-men",
+    name: "Heatwave",
+    blurb: "The lightest crew in the line.",
+    description:
+      "Same banana-cotton blend, knitted a touch finer for the worst weeks. Teal or dusk. No print.",
+    price: 999,
+    audience: "men",
+    category: "crew",
+    knit: "soft-peel",
+    fit: "Regular",
+    colors: [
       { name: "Dusk", hex: "#2c3e55", image: "/looks/heatwave-dusk.jpg" },
+      { name: "Teal", hex: "#2f6f6a", image: "/looks/heatwave-men-teal.jpg" },
     ],
     sizes: [...SIZES],
   },
@@ -342,6 +429,22 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L", "XL"],
     badge: "New",
   },
+  {
+    slug: "daily-three",
+    name: "Daily Three",
+    blurb: "Three Daily Crews: ink, sand, and dusk.",
+    description:
+      "A week’s worth of the same crew, in the three Daily colours. Each shirt is the regular Soft Peel cut. Pick one size and it applies to all three.",
+    price: 2499,
+    compareAt: 2997,
+    audience: "men",
+    category: "pack",
+    knit: "soft-peel",
+    fit: "Regular",
+    colors: [{ name: "Set", hex: "#1a1814", image: "/looks/daily-three.jpg" }],
+    sizes: [...SIZES],
+    badge: "New",
+  },
   joke("joke-no-thoughts", "No Thoughts", "men", "Ink", "#1a1814", "/looks/joke-no-thoughts.jpg", "no thoughts"),
   joke("joke-touch-grass", "Touch Grass", "men", "Paper", "#f7f1e6", "/looks/joke-touch-grass.jpg", "touch grass"),
   joke("joke-send-help", "Send Help", "men", "Navy", "#243044", "/looks/joke-send-help.jpg", "send help"),
@@ -354,6 +457,73 @@ export const products: Product[] = [
   joke("joke-on-dnd", "On DND", "women", "Teal", "#2f6f6a", "/looks/joke-on-dnd.jpg", "on dnd"),
 ];
 
+function attachViews(slug: string, color: string, stem: string) {
+  const entry = products.find((product) => product.slug === slug)?.colors.find((item) => item.name === color);
+  if (!entry) throw new Error(`Missing colour ${color} on ${slug}`);
+  entry.views = [
+    { label: "Front", src: entry.image },
+    { label: "Back", src: `/looks/${stem}-back.jpg` },
+    { label: "Side", src: `/looks/${stem}-side.jpg` },
+    { label: "Detail", src: `/looks/${stem}-detail.jpg` },
+  ];
+}
+
+const viewSets: [string, string, string][] = [
+  ["ripe-crew", "Ripe", "ripe-crew-ripe"],
+  ["ripe-crew", "Ink", "ripe-crew-women-ink"],
+  ["ripe-crew-men", "Ink", "ripe-crew-ink"],
+  ["ripe-crew-men", "Ripe", "ripe-crew-men-ripe"],
+  ["daily-crew", "Ink", "daily-crew-ink"],
+  ["daily-crew", "Sand", "daily-crew-sand"],
+  ["daily-crew", "Dusk", "daily-crew-dusk"],
+  ["oversized-bunch", "Ink", "oversized-ink"],
+  ["oversized-bunch", "Olive", "oversized-olive"],
+  ["too-ripe", "Paper", "too-ripe-paper"],
+  ["too-ripe", "Ink", "too-ripe-women-ink"],
+  ["too-ripe-men", "Ink", "too-ripe-ink"],
+  ["too-ripe-men", "Paper", "too-ripe-men-paper"],
+  ["after-class", "Maroon", "after-class-maroon"],
+  ["after-class", "Navy", "after-class-navy"],
+  ["night-bus", "Ink", "night-bus-ink"],
+  ["night-bus", "Teal", "night-bus-men-teal"],
+  ["night-bus-women", "Teal", "night-bus-teal"],
+  ["night-bus-women", "Ink", "night-bus-women-ink"],
+  ["lounge-tee", "Blush", "lounge-blush"],
+  ["lounge-tee", "Ink", "lounge-ink"],
+  ["lounge-tee", "Sand", "lounge-sand"],
+  ["crop-being", "Olive", "crop-olive"],
+  ["crop-being", "Paper", "crop-paper"],
+  ["big-cloud", "Brown", "big-cloud-brown"],
+  ["big-cloud", "Ink", "big-cloud-ink"],
+  ["being-print", "Paper", "being-print-paper"],
+  ["heatwave", "Teal", "heatwave-teal"],
+  ["heatwave", "Dusk", "heatwave-women-dusk"],
+  ["heatwave-men", "Dusk", "heatwave-dusk"],
+  ["heatwave-men", "Teal", "heatwave-men-teal"],
+  ["first-peel", "Pale", "first-peel-pale"],
+  ["air-vest", "Ink", "vest-ink"],
+  ["air-vest", "Sand", "vest-sand"],
+  ["cloud-crop", "Paper", "crop-cloud-paper"],
+  ["cloud-crop", "Ink", "crop-cloud-ink"],
+  ["daily-three", "Set", "daily-three"],
+  ["joke-no-thoughts", "Ink", "joke-no-thoughts"],
+  ["joke-touch-grass", "Paper", "joke-touch-grass"],
+  ["joke-send-help", "Navy", "joke-send-help"],
+  ["joke-plot-twist", "Maroon", "joke-plot-twist"],
+  ["joke-low-bat", "Olive", "joke-low-bat"],
+  ["joke-the-vibe", "Blush", "joke-the-vibe"],
+  ["joke-soft-launch", "Paper", "joke-soft-launch"],
+  ["joke-be-so-real", "Ink", "joke-be-so-real"],
+  ["joke-npc", "Ripe", "joke-npc"],
+  ["joke-on-dnd", "Teal", "joke-on-dnd"],
+];
+
+for (const [slug, color, stem] of viewSets) attachViews(slug, color, stem);
+
+export function colorViews(color: Colorway): ColorView[] {
+  return color.views?.length ? color.views : [{ label: "Front", src: color.image }];
+}
+
 export function getProduct(slug: string) {
   return products.find((p) => p.slug === slug);
 }
@@ -362,18 +532,33 @@ export function isOnSale(product: Product) {
   return product.compareAt != null && product.compareAt > product.price;
 }
 
+export function catalogColors() {
+  const seen = new Map<string, string>();
+  for (const product of products) {
+    for (const color of product.colors) {
+      if (!seen.has(color.name)) seen.set(color.name, color.hex);
+    }
+  }
+  return [...seen.entries()].map(([name, hex]) => ({ name, hex }));
+}
+
 export function filterProducts(opts: {
   audience?: string;
   category?: string;
   sale?: boolean;
   q?: string;
+  color?: string;
+  size?: string;
 }) {
   const q = opts.q?.trim().toLowerCase();
+  const color = opts.color?.toLowerCase();
   return products.filter((p) => {
     if (opts.audience === "men" && p.audience === "women") return false;
     if (opts.audience === "women" && p.audience === "men") return false;
     if (opts.category && p.category !== opts.category) return false;
     if (opts.sale && !isOnSale(p)) return false;
+    if (color && !p.colors.some((entry) => entry.name.toLowerCase() === color)) return false;
+    if (opts.size && !p.sizes.includes(opts.size)) return false;
     if (q) {
       const hay = `${p.name} ${p.blurb} ${p.category} ${p.print ?? ""}`.toLowerCase();
       if (!hay.includes(q)) return false;
@@ -384,7 +569,7 @@ export function filterProducts(opts: {
 
 export function relatedProducts(product: Product, limit = 4) {
   return products
-    .filter((p) => p.slug !== product.slug && (p.audience === product.audience || p.audience === "unisex" || product.audience === "unisex"))
+    .filter((p) => p.slug !== product.slug && p.audience === product.audience)
     .slice(0, limit);
 }
 

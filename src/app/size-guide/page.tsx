@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = { title: "Size guide" };
 
 const rows = [
-  ["XS", "86", "66"],
-  ["S", "91", "71"],
-  ["M", "96", "76"],
-  ["L", "104", "81"],
-  ["XL", "112", "86"],
-  ["XXL", "120", "91"],
+  ["XS", "86", "66", "40"],
+  ["S", "91", "71", "42"],
+  ["M", "96", "76", "44"],
+  ["L", "104", "81", "46"],
+  ["XL", "112", "86", "48"],
+  ["XXL", "120", "91", "50"],
 ];
 
 export default function SizeGuidePage() {
@@ -25,6 +25,7 @@ export default function SizeGuidePage() {
             <th className="py-3 font-semibold">Size</th>
             <th className="py-3 font-semibold">Chest (cm)</th>
             <th className="py-3 font-semibold">Length (cm)</th>
+            <th className="py-3 font-semibold">Shoulder (cm)</th>
           </tr>
         </thead>
         <tbody>

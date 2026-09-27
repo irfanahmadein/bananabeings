@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ProductDetails } from "@/components/product-details";
 import { ProductPicker } from "@/components/product-picker";
 import { ProductRail } from "@/components/product-rail";
 import { getProduct, products, relatedProducts } from "@/data/catalog";
@@ -27,6 +28,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   return (
     <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8">
       <ProductPicker product={product} />
+      <ProductDetails product={product} />
       <ProductRail
         eyebrow="Also"
         title="Worn with these"

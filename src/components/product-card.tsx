@@ -53,7 +53,9 @@ export function ProductCard({ product, rail = false }: { product: Product; rail?
           <Link href={`/product/${product.slug}`} className="text-sm font-semibold tracking-tight hover:underline">
             {product.name}
           </Link>
-          <p className="mt-0.5 text-xs capitalize text-muted">{product.fit}</p>
+          <p className="mt-0.5 text-xs capitalize text-muted">
+            {product.audience} · {product.fit}
+          </p>
           <div className="mt-2 flex gap-1.5" aria-hidden="true">
             {product.colors.map((entry) => (
               <span key={entry.name} className="h-3 w-3 rounded-full border border-line" style={{ background: entry.hex }} />

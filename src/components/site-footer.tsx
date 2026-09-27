@@ -26,6 +26,7 @@ export function SiteFooter() {
             ["/shop?c=vest", "Vests"],
             ["/shop?c=crop", "Crops"],
             ["/shop?c=joke", "Joke prints"],
+            ["/shop?c=pack", "Packs"],
           ]}
         />
         <FooterCol

@@ -14,6 +14,7 @@ const menus = [
       { href: "/shop?g=men&c=vest", label: "Vest" },
       { href: "/shop?g=men&c=oversized", label: "Oversized" },
       { href: "/shop?g=men&c=joke", label: "Jokes" },
+      { href: "/shop?c=pack", label: "Packs" },
     ],
   },
   {
